@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2022_02_17_200655) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image_url", default: "camera-card.jpg"
+    t.string "image_url"
   end
 
   create_table "movies", force: :cascade do |t|
