@@ -14,6 +14,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(strong_params)
+    @list.image_url = 'camera-card.jpg' if /\A(http:|https:).{6,}(.jpg|.jpeg|.png)/.match(@list.image_url).nil?
     if @list.save
       redirect_to list_path(@list)
     else
