@@ -5,13 +5,20 @@
   </div>
 </div>
 <div class="banner">
-  <h2> Save any kind of movies</h2>
-  <p> Classic </p>
+  <div class="header-container">
+    <h2> Save any kind of movies</h2>
+    <p> Classic </p>
+  </div>
 </div>
 <div class="container">
-  <ul> My lists
+  <h4> My lists </h4>
+  <div class="row row-cols-3 mx-n5">
     <% @lists.each do |list| %>
-    <li ><%= link_to list.name, list_path(list) %> </li>
+    <div class="col px-5 my-3">
+      <div class="card">
+        <%= link_to list.name, list_path(list) %>
+        </div>
+    </div>
     <% end %>
-  </ul>
+  </div>
 </div>
