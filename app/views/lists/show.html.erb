@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-    <div class="home-link"> ICON</div>
+    <div class="home-link"> <a href='#' > <i class="fa-regular fa-camera-movie"></i></a></div>
     <div class="links px-3 py-1">
       <%= link_to "My lists", root_path %>
       <%= link_to "New list", new_list_path %>
@@ -10,19 +10,31 @@
   <div class="container-banner">
     <h2> <%= @list.name %> </h2>
   </div>
-
 </div>
 
+  <div class="bmark-form d-flex justify-content-start">
+    <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.input :comment %>
+    <%= f.association :movie %>
+    <%= f.submit "Add Movie", class:"btn btn-primary" %>
+    <% end %>
+  </div>
+
 <div class="container mt-5 p-3">
-  <%= link_to "Add a Movie", new_list_bookmark_path(@list) %>
-  <div class="row row-cols-3 mx-n5">
+  <%= link_to "Add a Movie" %>
+  <div class="row row-cols-2 mx-n5 justify-content-center">
     <% @list.bookmarks.each do |bookmark| %>
       <div class="col px-5 my-3">
-        <div class="card-film" style="background-image: url(<%=bookmark.movie.poster_url%>)">
-          <h4 class="card-title"> <%= bookmark.movie.title %> </h4>
-          <p> <%= bookmark.movie.overview %> </p>
-          <p><%= bookmark.comment %></p>
-          <%= link_to "Delete the Movie", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
+        <div class="card-trip">
+          <%= image_tag(bookmark.movie.poster_url) %>
+          <div class="card-trip-infos">
+            <div>
+              <h2> <%= bookmark.movie.title %> </h2>
+              <p> <%= bookmark.movie.overview %> </p>
+            </div>
+            <p><%= bookmark.comment %></p>
+            <%= link_to "Delete the Movie", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
+          </div>
         </div>
       </div>
     <% end %>
