@@ -5,7 +5,7 @@ export default class extends Controller {
 
   toggleForm() {
     console.log("button pressed");
-    this.buttonTargetclassList.add('d-none');
+    this.buttonTarget.classList.add('d-none');
     this.formTarget.classList.remove('d-none');
   }
 }
