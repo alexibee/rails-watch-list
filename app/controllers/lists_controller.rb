@@ -15,7 +15,6 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(strong_params)
-    @list.photo.attach(strong_params[:photo])
     if @list.photo.attached? == false
       @list.photo.attach(io: image_grab, content_type: 'image/jpg')
     end
