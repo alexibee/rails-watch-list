@@ -14,7 +14,10 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(strong_params)
-    @list.image_url = 'camera-card.jpg' if /\A(http:|https:).{6,}(.jpg|.jpeg|.png)/.match(@list.image_url).nil?
+    if @list.photo.image_url.nil?
+      @list.photo.image_url = 'https://res.cloudinary.com/dhoecmw9w/image/upload/v1645186968/b9xz7zvvddzkqmf3ldjh.jpg'
+    end
+
     if @list.save
       redirect_to list_path(@list)
     else
@@ -25,6 +28,6 @@ class ListsController < ApplicationController
   private
 
   def strong_params
-    params.require(:list).permit(:name, :image_url)
+    params.require(:list).permit(:name, :photo)
   end
 end
