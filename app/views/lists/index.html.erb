@@ -17,7 +17,7 @@
   <div class="row row-cols-3 mx-n5">
     <% @lists.each do |list| %>
     <div class="col px-5 my-3">
-      <div class="card-category" style="background-image: url(<%= cloudinary_url(list.photo.key, ) %>)">
+      <div class="card-category" style="background-image: url(<%= cloudinary_url(list.photo.key) %>)">
         <h4> <%= link_to list.name, list_path(list) %> </h4>
       </div>
     </div>
