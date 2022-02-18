@@ -44,6 +44,7 @@ a {
 .card-category {
   background-size: cover;
   background-position: center;
+  position:relative;
   height: 180px;
   display: flex;
   justify-content: center;
@@ -68,6 +69,7 @@ a {
 
 .card-film a {
   color: white;
+  position: absolute;
 
   &:hover {
     color: yellowgreen;

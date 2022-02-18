@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-
+  require 'open-uri'
   def index
     @lists = List.all
   end
@@ -14,8 +14,8 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(strong_params)
-    if @list.photo.image_url.nil?
-      @list.photo.image_url = 'https://res.cloudinary.com/dhoecmw9w/image/upload/v1645186968/b9xz7zvvddzkqmf3ldjh.jpg'
+    if @list.photo.attached? == false
+      @list.photo.attach(io: image_grab, filename: 'camera-card.jpg', content_type: 'image/jpg')
     end
 
     if @list.save
@@ -26,6 +26,10 @@ class ListsController < ApplicationController
   end
 
   private
+
+  def image_grab
+    URI.open('https://res.cloudinary.com/dhoecmw9w/image/upload/v1645186968/b9xz7zvvddzkqmf3ldjh.jpg')
+  end
 
   def strong_params
     params.require(:list).permit(:name, :photo)

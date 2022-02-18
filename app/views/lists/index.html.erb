@@ -17,12 +17,11 @@
   <div class="row row-cols-3 mx-n5">
     <% @lists.each do |list| %>
     <div class="col px-5 my-3">
-      <div class="card-category">
-      <%raise%>
-        <%= cl_image_tag(list.photo.key,
-            width: 400, height: 300, crop: :fill) %>
+      <div class="card-category" style = "background-image: url(<%= rails_blob_url(list.photo) %>);" >
+        <%# <%= cl_image_tag(list.photo.key,
+            width: 400, height: 300, crop: :fill, class:"card-category") %>
         <h4> <%= link_to list.name, list_path(list) %> </h4>
-        </div>
+      </div>
     </div>
     <% end %>
   </div>
