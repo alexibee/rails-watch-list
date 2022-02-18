@@ -12,16 +12,18 @@
   </div>
 </div>
 
+<div class="form-container" data-controller="toggle-form">
+  <button class="btn btn-flat" data-toggle-form-target="button" data-action="click->toggle-form#toggleForm">Add a movie</button>
   <div class="bmark-form d-flex justify-content-start">
-    <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= simple_form_for [@list, @bookmark], html: {class: "d-none", data: {toggle_form_target: "form"}} do |f| %>
     <%= f.input :comment %>
     <%= f.association :movie %>
     <%= f.submit "Add Movie", class:"btn btn-primary" %>
     <% end %>
   </div>
+</div>
 
 <div class="container mt-5 p-3">
-  <%= link_to "Add a Movie" %>
   <div class="row row-cols-2 mx-n5 justify-content-center">
     <% @list.bookmarks.each do |bookmark| %>
       <div class="col px-5 my-3">
@@ -40,3 +42,9 @@
     <% end %>
   </div>
 </div>
+
+      <%# <button class="btn btn-secondary" data-form-target="button" data-action="click->form#display">Add a plant</button>
+      <%= simple_form_for [@garden, @plant],  do |f| %>
+        <%# <%= f.input :name, placeholder: "Palm tree" %>
+        <%# <%= f.input :image_url, placeholder: "https://some_nice_image_found_on_google.jpg" %>
+        <%# <%= f.submit "Add", class: "btn btn-primary" %>

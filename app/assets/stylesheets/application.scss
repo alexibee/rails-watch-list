@@ -99,3 +99,17 @@ a {
 .card-trip a {
   font-size: 12px;
 }
+
+.btn-flat {
+  font-size: 12px;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: #1EDD88;
+  transition: background 0.3s ease;
+}
+
+.btn-flat:hover {
+  background: #1BCB7F;
+  color: white;
+}
