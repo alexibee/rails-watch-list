@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'root', to: 'lists#index'
+  get root, to: 'lists#index'
   resources :lists, only: %i[show new create] do
     resources :bookmarks, only: %i[new create]
   end
