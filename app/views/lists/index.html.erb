@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-    <div class="home-link"><a href='#'> <%= fa_icon "camera-retro"%></a></div>
+    <div class="home-link"><a href='#'> <%= fa_icon "camera-retro"%></i></a></div>
     <div class="links px-3 py-1">
       <%= link_to "My lists", root_path %>
       <%= link_to "New list", new_list_path %>
@@ -17,9 +17,7 @@
   <div class="row row-cols-3 mx-n5">
     <% @lists.each do |list| %>
     <div class="col px-5 my-3">
-      <div class="card-category" style = "background-image: url(<%= rails_blob_url(list.photo) %>);" >
-        <%# <%= cl_image_tag(list.photo.key,
-            width: 400, height: 300, crop: :fill, class:"card-category") %>
+      <div class="card-category" style="background-image: url(<%= cloudinary_url(list.photo.key) %>)">
         <h4> <%= link_to list.name, list_path(list) %> </h4>
       </div>
     </div>

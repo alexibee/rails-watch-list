@@ -16,7 +16,7 @@ class ListsController < ApplicationController
   def create
     @list = List.new(strong_params)
     if @list.photo.attached? == false
-      @list.photo.attach(io: image_grab, filename: 'camera-card.jpg', content_type: 'image/jpg')
+      @list.photo.attach(io: image_grab, content_type: 'image/jpg')
     end
 
     if @list.save
