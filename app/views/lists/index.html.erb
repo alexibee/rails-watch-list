@@ -1,17 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-    <div class="home-link"><a href='#'> <%= fa_icon "camera-retro"%></i></a></div>
-    <div class="links px-3 py-1">
-      <%= link_to "My lists", root_path %>
-      <%= link_to "New list", new_list_path %>
-  </div>
-</nav>
 <div class="banner text-center">
-  <%# <%= image_tag 'cinema-banner.jpg',class: "bg-image" %>
   <div class="container-banner">
     <h1> Save any kind of movies</h1>
-    <p> Classic </p>
+    <% @lists.each do |list| %>
+      <p> <%= link_to list.name.downcase.gsub("movies","").capitalize, list_path(list) %> </p>
+    <% end %>
   </div>
 </div>
+
 <div class="container mt-5 p-3">
   <div class="px-3 mx-1">
     <div class="container col d-flex justify-content-between">

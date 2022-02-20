@@ -1,28 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
-    <div class="home-link"> <a href='#' > <i class="fa-regular fa-camera-movie"></i></a></div>
-    <div class="links px-3 py-1">
-      <%= link_to "My lists", root_path %>
-      <%= link_to "New list", new_list_path %>
-  </div>
-</nav>
 <div class="banner text-center">
-
   <div class="container-banner">
-    <h2> <%= @list.name %> </h2>
+    <h2> <%=link_to @list.name, list_path(@list) %> </h2>
   </div>
 </div>
 
-<div class="form-container" data-controller="toggle-form">
-  <button class="btn btn-flat" data-toggle-form-target="button" data-action="click->toggle-form#toggleForm">Add a movie</button>
-  <div class="bmark-form d-flex justify-content-start">
-    <%= simple_form_for [@list, @bookmark], html: {class: "d-none", data: {toggle_form_target: "form"}} do |f| %>
-    <%= f.input :comment %>
-    <%= f.association :movie %>
-    <%= f.submit "Add Movie", class:"btn btn-primary" %>
-    <% end %>
+<% btn_toggle = controller_name == "bookmarks" ? %w[btn btn-flat d-none] : %w[btn btn-flat] %>
+<% form_toggle = controller_name == "bookmarks" ? "" : "d-none" %>
+
+<div class="row d-flex justify-content-center">
+  <div class="d-flex justify-content-end mx-5 mt-5 col-9" data-controller="toggle-form">
+    <div class="bmark-form">
+      <%= simple_form_for [@list, @bookmark], html: { class: form_toggle, data: {toggle_form_target: "form"}} do |f| %>
+      <%= f.input :comment %>
+      <%= f.association :movie %>
+      <%= f.submit "Add Movie", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+    <button class="<%=btn_toggle.join(" ")%>" data-toggle-form-target="button" data-action="click->toggle-form#toggleForm">Add a movie</button>
   </div>
 </div>
-
 <div class="container mt-5 p-3">
   <div class="row row-cols-2 mx-n5 justify-content-center">
     <% @list.bookmarks.each do |bookmark| %>
@@ -30,21 +26,22 @@
         <div class="card-trip">
           <%= image_tag(bookmark.movie.poster_url) %>
           <div class="card-trip-infos">
-            <div>
-              <h2> <%= bookmark.movie.title %> </h2>
+            <div class="card-movie-overview">
+              <h2> <%= bookmark.movie.title %>
+              • <%=bookmark.movie.rating%>⭐️ </h2>
               <p> <%= bookmark.movie.overview %> </p>
             </div>
-            <p><%= bookmark.comment %></p>
-            <%= link_to "Delete the Movie", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
+            <div class="card-movie-bottom d-flex justify-content-between">
+              <div class="card-movie-bottom-left">
+                <p> ❝ <%= bookmark.comment %></p>
+              </div>
+              <div class="card-movie-bottom-right">
+                <%= link_to "Delete the Movie", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-
-      <%# <button class="btn btn-secondary" data-form-target="button" data-action="click->form#display">Add a plant</button>
-      <%= simple_form_for [@garden, @plant],  do |f| %>
-        <%# <%= f.input :name, placeholder: "Palm tree" %>
-        <%# <%= f.input :image_url, placeholder: "https://some_nice_image_found_on_google.jpg" %>
-        <%# <%= f.submit "Add", class: "btn btn-primary" %>
